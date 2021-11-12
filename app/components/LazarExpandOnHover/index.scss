@@ -1,0 +1,20 @@
+.expandonhover {
+    background-color: aqua;
+    border: 1px dotted orange;
+    width: 50%;
+	&:hover {
+		.expandonhover_text {
+			transition: all ease-in 0.5s;
+			width: 250px;
+		}
+	}
+    &_text {
+        color: blue;
+        border: 3px solid black;
+		width: 0;
+
+    }
+    &_icon {
+        color: green;
+    }
+}
