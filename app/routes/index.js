@@ -12,6 +12,7 @@ import { SandboxedRoute } from '../components/SandboxedRoute';
 import InvoiceRoutes from './invoices';
 import Forms from './forms';
 import { PageNotImplemented } from '../components/PageNotImplemented';
+import Customers from './customers';
 
 export default () => (
     <cx>
@@ -41,7 +42,7 @@ export default () => (
                 </SandboxedRoute>
 
                 <Route route="~/customers" url-bind="url" prefix>
-                    <PageNotImplemented />
+                    <Customers />
                 </Route>
                 <Route route="~/settings" url-bind="url" prefix>
                     <PageNotImplemented />

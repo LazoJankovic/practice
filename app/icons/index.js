@@ -32,6 +32,7 @@ import {
     ViewListIcon,
     XIcon,
     CheckCircleIcon,
+    TrashIcon
 } from '@heroicons/react/outline';
 
 import {
@@ -43,6 +44,8 @@ import {
 //register all icons that are used within the application
 
 Icon.register('office-building', (props) => <OfficeBuildingIcon {...props} />);
+
+Icon.register('trash', (props) => <TrashIcon {...props} />);
 
 Icon.register('scale', (props) => <ScaleIcon {...props} />);
 

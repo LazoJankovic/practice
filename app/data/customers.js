@@ -21,7 +21,7 @@ export const customerEndpoints = [
         let results = [...customers];
         if (query) {
             const predicate = getSearchQueryPredicate(query);
-            results = results.filter((x) => predicate(x.name) || predicate(x.address));
+            results = results.filter((x) => predicate(x.name) || predicate(x.address.city) || predicate(x.phone));
         }
         results = results.slice((page - 1) * pageSize, page * pageSize);
         return res(ctx.json(results));
