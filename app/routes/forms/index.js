@@ -88,17 +88,31 @@ export default (
             </div>
 
             <div
-                class="widgets"
+                class="widgets "
                 style={{
                     borderLeftWidth: '3px',
                     borderLeftStyle: 'solid',
                     borderLeftColor: { expr: '{$validationForm.valid} ? "lightgreen" : "red"' },
                     padding: '10px',
+                    background: 'violet',
                 }}
             >
                 <ValidationGroup layout={LabelsLeftLayout} valid:bind="$validationForm.valid">
-                    <TextField label="First Name" value:bind="$validationForm.firstName" required />
-                    <TextField label="Last Name" value:bind="$validationForm.lastName" required />
+                    <form onSubmit="onValidate">
+                        <TextField
+                            label="First Name"
+                            value:bind="$validationForm.firstName"
+                            required
+                            validationMode="help-block"
+                        />
+                        <TextField
+                            validationMode="help-block"
+                            label="Last Name"
+                            value:bind="$validationForm.lastName"
+                            required
+                        />
+                        <Button submit>Validate</Button>
+                    </form>
                 </ValidationGroup>
             </div>
 

@@ -128,6 +128,28 @@ export default () => (
                             </cx>
                         ),
                     },
+                   /*  {
+                        header1: {
+                            text: 'Image',
+                            rowSpan: 2,
+                        },
+                        field: 'img',
+                        items: (
+                            <cx>
+                                <img
+                                    class="h-14"
+                                    src-bind="$record.image"
+                                    tooltip={{
+                                        items: (
+                                            <cx>
+                                                <img class="h-128" src-bind="$record.image" />
+                                            </cx>
+                                        ),
+                                    }}
+                                />
+                            </cx>
+                        ),
+                    }, */
                     {
                         align: 'center',
                         header1: {
@@ -156,14 +178,7 @@ export default () => (
                         },
                         field: 'phone',
                     },
-                    {
-                        header1: {
-                            text: 'Country',
-                            rowSpan: 2,
-                        },
-                        field: 'country',
-                    },
-                    {
+                    /* {
                         header1: {
                             text: 'delete',
                             rowSpan: 2,
@@ -174,7 +189,7 @@ export default () => (
                                 <Button mod="hollow" icon="trash" onClick="onRemove" />
                             </cx>
                         ),
-                    },
+                    }, */
                 ]}
             />
             <div class="border-t p-2 flex  ">
