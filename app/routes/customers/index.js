@@ -1,7 +1,9 @@
 import Controller from './Controller';
+import { Line, Rectangle, Svg, Text } from 'cx/svg';
+import { ColorMap, Legend, PieChart, PieSlice } from 'cx/charts';
 import { TextField, Button, Grid, Pagination, LookupField, Window, TextArea, DateField } from 'cx/widgets';
 import { getSearchQueryPredicate } from 'cx/util';
-import { LabelsLeftLayout } from 'cx/ui';
+import { LabelsLeftLayout, Repeater, KeySelection } from 'cx/ui';
 export default () => (
     <cx>
         <div class="overflow-hidden flex flex-col text-gray-600" controller={Controller}>
@@ -69,11 +71,26 @@ export default () => (
             >
                 Open
             </Button> */}
+
+            <div class="m-5 mt-10">
+                Group by:
+                <LookupField records-bind="$page.grouping" options-bind="$page.groupableFields" multiple={true} />
+            </div>
             <Grid
                 class="flex-grow"
                 buffered
+                fixedFooter //without fix footer my grouping is not shown
+                //style={{ width: '100%', height: '800px' }}
+                groupingParams-bind="$page.grouping" //Whenever groupingParams change, columns are recalculated using the onGetGrouping callback.
+                onGetGrouping={(groupingParams) => [
+                    { key: {}, showFooter: true },
+                    ...(groupingParams || []).map((x) => x.id),
+                ]}
+                //caption // A selector used to calculate group's caption.
+                //showCaption // Show group caption. Values shown in the caption should be specified in the column definition.
+                //showHeader
                 grouping={[
-                    { showFooter: false },
+                    { showFooter: true },
                     {
                         key: {
                             name: { bind: '$record.country' },
@@ -81,7 +98,7 @@ export default () => (
                         showCaption: true,
                     },
                 ]}
-                //fixedFooter
+                //groupingParams
                 // mod="fixed-layout"
                 // filterParams-bind="search.query"
                 // onCreateFilter={(query) => {
@@ -111,7 +128,7 @@ export default () => (
                             text: 'Image',
                             rowSpan: 2,
                         },
-                        field: 'img',
+                        field: 'image',
                         items: (
                             <cx>
                                 <img
@@ -128,7 +145,64 @@ export default () => (
                             </cx>
                         ),
                     },
-                   /*  {
+                    {
+                        header: {
+                            text: 'Pie Chart',
+                            rowSpan: 2,
+                        },
+                        items: (
+                            <cx>
+                                <div>
+                                    <Svg style="width:200px; height:150px;">
+                                        <ColorMap />
+                                        <PieChart angle={360}>
+                                            <Repeater records-bind="$record.meGusta">
+                                                <PieSlice
+                                                    value-bind="$record.gusta"
+                                                    //active-bind="$record.active"
+                                                    colorMap="pie"
+                                                    r-expr="80"
+                                                    r0-expr="20"
+                                                    offset={2}
+                                                    tooltip={{
+                                                        text: {
+                                                            tpl: '{$record.name}: {$record.gusta}',
+                                                        },
+                                                        trackMouse: true,
+                                                        globalMouseTracking: true,
+                                                        destroyDelay: 50,
+                                                        createDelay: 0,
+                                                        animate: false,
+                                                    }}
+                                                    innerPointRadius={20}
+                                                    outerPointRadius={90}
+                                                    name-tpl="{$record.name}"
+                                                    /* selection={{
+                                                    type: KeySelection,
+                                                    bind: '$page.selection',
+                                                    records: { bind: 'meGusta' },
+                                                    record: { bind: '$record' },
+                                                    index: { bind: '$index' },
+                                                    keyField: 'id',
+                                                }} */
+                                                >
+                                                    <Line style="stroke:gray" />
+                                                    <Rectangle
+                                                        anchors="1 1 1 1"
+                                                        offset="-10 20 10 -20"
+                                                        style="fill:white"
+                                                    >
+                                                        <Text tpl="{$record.gusta:n;1}" dy="0.4em" ta="middle" />
+                                                    </Rectangle>
+                                                </PieSlice>
+                                            </Repeater>
+                                        </PieChart>
+                                    </Svg>
+                                </div>
+                            </cx>
+                        ),
+                    },
+                    /*  {
                         header1: {
                             text: 'Image',
                             rowSpan: 2,
@@ -153,7 +227,6 @@ export default () => (
                     {
                         align: 'center',
                         header1: {
-                            text: 'Address',
                             colSpan: 2,
                         },
                         style: 'white-space: nowrap',
@@ -161,7 +234,7 @@ export default () => (
                         field: 'address.city',
                         sortable: true,
                         align: 'center',
-                        aggregate: 'distinct',
+                        //aggregate: 'count',
                         caption: { tpl: '{$record.country}' },
                     },
                     {
