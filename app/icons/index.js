@@ -32,7 +32,8 @@ import {
     ViewListIcon,
     XIcon,
     CheckCircleIcon,
-    TrashIcon
+    TrashIcon,
+    SparklesIcon,
 } from '@heroicons/react/outline';
 
 import {
@@ -42,7 +43,7 @@ import {
 } from '@heroicons/react/solid';
 
 //register all icons that are used within the application
-
+Icon.register('sparkles', (props) => <SparklesIcon {...props} />);
 Icon.register('office-building', (props) => <OfficeBuildingIcon {...props} />);
 
 Icon.register('trash', (props) => <TrashIcon {...props} />);

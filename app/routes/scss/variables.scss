@@ -1,0 +1,15 @@
+$light-color: #f4f4f4;
+$font-stack: Arial, Helvetica, sans-serif; //any font stack can be put in variable
+$primary-color: #0e6cff;
+$secondary-color: #ff8700;
+$margin: 4px;
+
+.margin {
+    margin: $margin;
+
+    @for $i from 2 through 12 {
+        &-bottom-#{$i}x {
+            margin-bottom: $i * $margin;
+        }
+    }
+}

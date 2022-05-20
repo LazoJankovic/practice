@@ -1,0 +1,9 @@
+$margin-btn: 4px;
+
+%btn { //do not need to put '%' character
+    display: inline-block;
+    border-radius: 5px;
+    padding: 8px 20px;
+    margin: $margin-btn;
+    
+}

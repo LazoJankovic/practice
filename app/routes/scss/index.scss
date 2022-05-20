@@ -1,0 +1,62 @@
+@import 'variables.scss';
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $light-color;
+    font-family: $font-stack;
+    line-height: 1.6;
+}
+
+%wide-centered {
+    width: 90%;
+    margin-left: 5%;
+}
+
+.showcase {
+    background-color: $primary-color;
+    color: #fff;
+    height: 612px;
+    @extend %wide-centered;
+    
+    .container {
+        width: 100%;
+    }
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        ul {
+            display: flex;
+            list-style: none;
+        }
+        li {
+            padding: 10px;
+        }
+    }
+    a { 
+        text-decoration: none; 
+        color: $secondary-color;
+
+        &:hover {
+            color: gold;
+        }
+    }
+    &-content {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        border: 2px dotted black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        @extend %wide-centered;
+    }
+}
+
+.img {
+    width: 100%;
+}

@@ -13,7 +13,7 @@ import InvoiceRoutes from './invoices';
 import Forms from './forms';
 import { PageNotImplemented } from '../components/PageNotImplemented';
 import Customers from './customers';
-
+import SCSS from './scss';
 export default () => (
     <cx>
         <FirstVisibleChildLayout>
@@ -39,6 +39,10 @@ export default () => (
 
                 <SandboxedRoute route="~/forms">
                     <Forms />
+                </SandboxedRoute>
+
+                <SandboxedRoute route="~/scss">
+                    <SCSS />
                 </SandboxedRoute>
 
                 <Route route="~/customers" url-bind="url" prefix>
